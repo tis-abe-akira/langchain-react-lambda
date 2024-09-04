@@ -19,7 +19,6 @@ export default function AIChat() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    // ここでAIサービスへのリクエストを行う
 
     try {
       const response = await fetch(API_CONFIG.ENDPOINT, {
@@ -31,7 +30,9 @@ export default function AIChat() {
         body: JSON.stringify({ question: input }),
       });
 
-      if (!response.body) throw new Error("Response body is empty");
+      if (!response.body) {
+        throw new Error("Response body is null");
+      }
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
@@ -75,7 +76,7 @@ export default function AIChat() {
             placeholder="質問を入力してください。"
             className="w-full h-32"
           />
-          <Button type="submit" disabled={isLoading}>
+          <Button type="submit" disabled={isLoading || !input.trim()} className="bg-blue-700 text-white">
             {isLoading ? "送信中..." : "送信"}
           </Button>
         </form>

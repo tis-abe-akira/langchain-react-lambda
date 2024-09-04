@@ -1,0 +1,7 @@
+const API_CONFIG = {
+  ENDPOINT:
+    "https://<your-lambda-endpoint>/api/qa",
+  API_KEY: "<your-api-key>"
+};
+
+export default API_CONFIG;
